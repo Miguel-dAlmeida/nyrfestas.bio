@@ -720,7 +720,7 @@
                 width: 100%;
                 gap: 18px;
                 background: linear-gradient(118deg, var(--blue-dark) 0%, var(--blue) 48%, #1565C0 72%, #7A5500 100%);
-                padding: 5px 40px 38px;
+                padding: 44px 40px 38px;
                 position: relative;
                 overflow: hidden;
                 animation: slideInDown 0.75s cubic-bezier(.22, 1, .36, 1) both;
@@ -986,8 +986,7 @@
                 </div>
 
                 <div class="buttons">
-                    <a href="https://api.whatsapp.com/send/?phone=5511994698952&text=Ol%C3%A1%21+Cheguei+at%C3%A9+voc%C3%AAs+pelo+link+da+bio+no+Instagram+e+gostaria+de+falar+com+um+atendente&type=phone_number&app_absent=0"
-                        target="_blank" rel="noopener" class="btn btn-whatsapp">
+                    <a href="https://wa.me/5511994698952" target="_blank" rel="noopener" class="btn btn-whatsapp">
                         <span class="btn-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -1050,7 +1049,7 @@
         setInterval(updateCountdown, 1000);
 
         /* ── EMAIL ── */
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVc2xTNrDwHWkjuZXSHH15YHeyymI2BD5tIpnSh1Hn_5uT2P5AtvGyl4hx0gURa6k/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvpMDe0ponutawHBGR0pfoXyEQBi7xgV5pBcm8nVLNgagLiX0VJ0xweBuZNsJGlbZX/exec';
 
         function submitEmail() {
             const input = document.getElementById('emailInput');
@@ -1068,18 +1067,12 @@
             btn.textContent = 'Enviando...';
             btn.disabled = true;
 
-            const formData = new FormData();
-            formData.append('email', input.value.trim());
+            const url = SCRIPT_URL + '?email=' + encodeURIComponent(input.value.trim());
 
-            fetch(SCRIPT_URL, { method: 'POST', body: formData })
-                .then(r => r.json())
-                .then(data => {
-                    if (data.status === 'ok') {
-                        row.style.display = 'none';
-                        ok.style.display = 'block';
-                    } else {
-                        throw new Error('unexpected response');
-                    }
+            fetch(url, { method: 'GET', mode: 'no-cors' })
+                .then(() => {
+                    row.style.display = 'none';
+                    ok.style.display = 'block';
                 })
                 .catch(() => {
                     btn.textContent = 'QUERO!';
